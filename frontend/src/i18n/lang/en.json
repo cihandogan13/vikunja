@@ -181,9 +181,9 @@
           "mm-dd-yyyy": "MM-DD-YYYY",
           "dd-mm-yyyy": "DD-MM-YYYY",
           "yyyy-mm-dd": "YYYY-MM-DD",
-          "mm\/dd\/yyyy": "MM\/DD\/YYYY",
-          "dd\/mm\/yyyy": "DD\/MM\/YYYY",
-          "yyyy\/mm\/dd": "YYYY\/MM\/DD"
+          "mm/dd/yyyy": "MM/DD/YYYY",
+          "dd/mm/yyyy": "DD/MM/YYYY",
+          "yyyy/mm/dd": "YYYY/MM/DD"
         },
         "timeFormat": "Time format",
         "defaultDueTime": "Default due time",
@@ -863,7 +863,8 @@
     "home": "Vikunja home",
     "toggleChildProjects": "Toggle sub-projects",
     "main": "Main navigation",
-    "savedFilters": "Saved filters"
+    "savedFilters": "Saved filters",
+    "plan": "Plan"
   },
   "misc": {
     "loading": "Loading…",
@@ -1809,5 +1810,87 @@
       "futureExpiry": "Choose an expiry in the future.",
       "creatorDeleted": "Deleted user"
     }
+  },
+  "capture": {
+    "open": "Capture",
+    "title": "Capture",
+    "close": "Close",
+    "placeholder": "Write down the task on your mind...",
+    "send": "Send",
+    "sending": "Sending...",
+    "draftHint": "You can edit the draft. Saving comes in the next step.",
+    "new": "New capture",
+    "fields": {
+      "title": "Title",
+      "description": "Description",
+      "project": "Project",
+      "duration": "Duration (min)",
+      "importance": "Importance",
+      "urgency": "Urgency",
+      "dueDate": "Due date"
+    },
+    "level": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "commit": "Create task",
+    "committing": "Creating...",
+    "committed": "Task created (#{id}).",
+    "openTask": "Open task",
+    "mode": {
+      "text": "Text",
+      "voice": "Voice"
+    },
+    "transcript": "Transcript",
+    "voiceHint": "Record with the microphone; up to 2 minutes.",
+    "startRecording": "Start recording",
+    "stopRecording": "Stop and send",
+    "recording": "Recording {time}",
+    "processingVoice": "Processing voice...",
+    "micDenied": "Microphone permission denied.",
+    "micUnsupported": "This browser does not support audio recording.",
+    "audioFailed": "Voice capture failed.",
+    "sessionMissing": "Session not found. Please log in again.",
+    "subtasks": {
+      "title": "Subtasks",
+      "add": "Add subtask",
+      "placeholder": "Subtask title",
+      "duration": "Minutes",
+      "remove": "Remove subtask"
+    }
+  },
+  "plan": {
+    "title": "Plan",
+    "subtitle": "Daily plan between 08:00 and 23:00",
+    "refresh": "Refresh plan",
+    "date": "Date",
+    "scheduled": "Scheduled",
+    "unscheduled": "Unscheduled",
+    "errors": "Errors",
+    "empty": "No plan for this day yet.",
+    "manual": "Manual block",
+    "planned": "Planner",
+    "loading": "Loading...",
+    "minutes": "{count} min",
+    "kind": {
+      "manual": "Manual",
+      "morning": "Morning",
+      "evening": "Evening"
+    },
+    "importance": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "urgency": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "sessionMissing": "Session not found. Please log in again.",
+    "loadFailed": "Could not load the plan.",
+    "runFailed": "Could not create the plan.",
+    "deferred": "Deferred"
   }
 }

@@ -281,15 +281,22 @@ function getServeConfig(env: Record<string, string>) {
 		...buildConfig,
 		server: {
 			...buildConfig.server,
-			...(env.DEV_PROXY && { proxy: {
-				[proxyPath]: {
-					target: env.DEV_PROXY,
+			proxy: {
+				...(env.DEV_PROXY ? {
+					[proxyPath]: {
+						target: env.DEV_PROXY,
+						changeOrigin: true,
+						secure: false,
+						// Strips prefix for the backend
+						rewrite: (path: string) => path.replace(new RegExp(`^${base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`), ''),
+					},
+				} : {}),
+				'/capture': {
+					target: 'http://localhost:8090',
 					changeOrigin: true,
-					secure: false,
-					// Strips prefix for the backend
-					rewrite: (path: string) => path.replace(new RegExp(`^${base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`), ''),
+					rewrite: (path: string) => path.replace(/^\/capture/, ''),
 				},
-			}}),
+			},
 		},
 	}
 }

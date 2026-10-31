@@ -863,7 +863,8 @@
 		"home": "Vikunja Ana Sayfa",
 		"toggleChildProjects": "Alt projeleri göster/gizle",
 		"main": "Ana menü",
-		"savedFilters": "Kayıtlı filtreler"
+		"savedFilters": "Kayıtlı filtreler",
+		"plan": "Plan"
 	},
 	"misc": {
 		"loading": "Yükleniyor…",
@@ -1804,5 +1805,87 @@
 			"futureExpiry": "Gelecekteki bir tarih seçmelisin.",
 			"creatorDeleted": "Silinmiş kullanıcı"
 		}
+	},
+	"capture": {
+		"open": "Yakala",
+		"title": "Yakala",
+		"close": "Kapat",
+		"placeholder": "Aklındaki görevi yaz...",
+		"send": "Gönder",
+		"sending": "Gönderiliyor...",
+		"draftHint": "Taslağı düzenleyebilirsin. Kaydetme bir sonraki adımda.",
+		"new": "Yeni yakalama",
+		"fields": {
+			"title": "Başlık",
+			"description": "Açıklama",
+			"project": "Proje",
+			"duration": "Süre (dk)",
+			"importance": "Önem",
+			"urgency": "Aciliyet",
+			"dueDate": "Bitiş"
+		},
+		"level": {
+			"low": "Düşük",
+			"medium": "Orta",
+			"high": "Yüksek"
+		},
+		"commit": "Görevi Oluştur",
+		"committing": "Oluşturuluyor...",
+		"committed": "Görev oluşturuldu (#{id}).",
+		"openTask": "Görevi aç",
+		"mode": {
+			"text": "Yaz",
+			"voice": "Ses"
+		},
+		"transcript": "Transkript",
+		"voiceHint": "Mikrofonla kaydet; en fazla 2 dakika.",
+		"startRecording": "Kaydı başlat",
+		"stopRecording": "Durdur ve gönder",
+		"recording": "Kaydediliyor {time}",
+		"processingVoice": "Ses işleniyor...",
+		"micDenied": "Mikrofon izni verilmedi.",
+		"micUnsupported": "Tarayıcı ses kaydını desteklemiyor.",
+		"audioFailed": "Ses yakalama başarısız oldu.",
+		"sessionMissing": "Oturum bulunamadı. Lütfen tekrar giriş yap.",
+		"subtasks": {
+			"title": "Alt görevler",
+			"add": "Alt görev ekle",
+			"placeholder": "Alt görev başlığı",
+			"duration": "Dakika",
+			"remove": "Alt görevi kaldır"
+		}
+	},
+	"plan": {
+		"title": "Plan",
+		"subtitle": "08:00–23:00 arası günlük plan",
+		"refresh": "Planı Yenile",
+		"date": "Tarih",
+		"scheduled": "Planlanan",
+		"unscheduled": "Planlanamayan",
+		"errors": "Hatalar",
+		"empty": "Bu gün için henüz plan yok.",
+		"manual": "Manuel blok",
+		"planned": "Planlayıcı",
+		"loading": "Yükleniyor...",
+		"minutes": "{count} dk",
+		"kind": {
+			"manual": "Manuel",
+			"morning": "Sabah",
+			"evening": "Akşam"
+		},
+		"importance": {
+			"low": "Düşük",
+			"medium": "Orta",
+			"high": "Yüksek"
+		},
+		"urgency": {
+			"low": "Düşük",
+			"medium": "Orta",
+			"high": "Yüksek"
+		},
+		"sessionMissing": "Oturum bulunamadı. Lütfen tekrar giriş yap.",
+		"loadFailed": "Plan yüklenemedi.",
+		"runFailed": "Plan oluşturulamadı.",
+		"deferred": "Ertelenen"
 	}
 }

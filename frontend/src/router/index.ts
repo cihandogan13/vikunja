@@ -224,6 +224,11 @@ const router = createRouter({
 			props: route => ({ taskId: Number(route.params.id as string) }),
 		},
 		{
+			path: '/plan',
+			name: 'plan',
+			component: () => import('@/views/plan/PlanView.vue'),
+		},
+		{
 			path: '/tasks/by/upcoming',
 			name: 'tasks.range',
 			component: UpcomingTasks,
