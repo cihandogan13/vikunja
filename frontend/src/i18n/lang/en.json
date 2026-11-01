@@ -1833,7 +1833,8 @@
       "priority": "Priority",
       "reminder": "Remind (min before)",
       "planning": "Labels & planning",
-      "dialogHint": "Capture with text or voice, edit the draft and create the task."
+      "dialogHint": "Capture with text or voice, edit the draft and create the task.",
+      "reminderTimes": "Extra reminder times"
     },
     "level": {
       "low": "Low",
@@ -1878,7 +1879,12 @@
     "priorityAuto": "Auto",
     "reminderPlaceholder": "30",
     "commands": "Tip: write naturally. Optional: #label · !günlük/!haftalık/!aylık/!yıllık · !p1-!p5 · !hatırlat 30dk. Subtasks: -böl line + -ag title lines.",
-    "reminderNeedsDue": "A reminder needs a due date."
+    "reminderNeedsDue": "A reminder needs a due date.",
+    "addReminder": "Add time",
+    "reminderRef": {
+      "due": "Relative to due date",
+      "end": "Relative to end date"
+    }
   },
   "plan": {
     "title": "Plan",

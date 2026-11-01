@@ -281,6 +281,38 @@
 								>
 							</div>
 						</div>
+
+						<div class="capture-panel__reminder-times">
+							<div class="capture-panel__reminder-times-header">
+								<span class="label">{{ $t('capture.fields.reminderTimes') }}</span>
+								<XButton
+									variant="tertiary"
+									icon="plus"
+									:shadow="false"
+									@click="addReminderTime"
+								>
+									{{ $t('capture.addReminder') }}
+								</XButton>
+							</div>
+							<div
+								v-for="(time, index) in draft.reminder_times"
+								:key="index"
+								class="capture-panel__reminder-time"
+							>
+								<input
+									class="input"
+									type="datetime-local"
+									:value="reminderLocal(time)"
+									@input="setReminderTime(index, $event)"
+								>
+								<BaseButton
+									:aria-label="$t('capture.subtasks.remove')"
+									@click="removeReminderTime(index)"
+								>
+									<Icon icon="times" />
+								</BaseButton>
+							</div>
+						</div>
 					</aside>
 				</div>
 
@@ -400,6 +432,8 @@ type CaptureDraft = {
 	repeat_unit: '' | 'hour' | 'day' | 'week' | 'month' | 'year',
 	priority: number | null,
 	reminder_minutes: number | null,
+	reminder_times: string[],
+	reminder_relative_to: 'due_date' | 'end_date',
 	split_requested: boolean,
 	subtasks: SubtaskDraft[],
 	confidence: number,
@@ -481,6 +515,36 @@ const labelsText = computed({
 			.filter(Boolean)
 	},
 })
+
+function reminderLocal(value: string): string {
+	if (!value) {
+		return ''
+	}
+	return value.length === 10 ? `${value}T12:00` : value.slice(0, 16)
+}
+
+function setReminderTime(index: number, event: Event): void {
+	if (!draft.value) {
+		return
+	}
+	const value = (event.target as HTMLInputElement).value
+	if (!value) {
+		draft.value.reminder_times[index] = ''
+		return
+	}
+	const normalized = value.length === 16 ? `${value}:00` : value
+	draft.value.reminder_times[index] = `${normalized}+03:00`
+}
+
+function addReminderTime(): void {
+	if (draft.value && draft.value.reminder_times.length < 5) {
+		draft.value.reminder_times.push('')
+	}
+}
+
+function removeReminderTime(index: number): void {
+	draft.value?.reminder_times.splice(index, 1)
+}
 let projectsLoaded = false
 let captureId = ''
 let recorder: MediaRecorder | null = null
@@ -912,6 +976,30 @@ async function submit(): Promise<void> {
 
 	&__repeat-field {
 		grid-column: 1 / -1;
+	}
+
+	&__reminder-times {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+
+	&__reminder-times-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.5rem;
+
+		.label {
+			margin-block-end: 0;
+		}
+	}
+
+	&__reminder-time {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 0.4rem;
+		align-items: center;
 	}
 
 	&__hint {

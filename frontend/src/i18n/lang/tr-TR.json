@@ -1828,7 +1828,8 @@
 			"priority": "Öncelik",
 			"reminder": "Hatırlat (dk önce)",
 			"planning": "Etiket ve planlama",
-			"dialogHint": "Metin veya sesle yakala; taslağı düzenleyip görevi oluştur."
+			"dialogHint": "Metin veya sesle yakala; taslağı düzenleyip görevi oluştur.",
+			"reminderTimes": "Ek hatırlatma saatleri"
 		},
 		"level": {
 			"low": "Düşük",
@@ -1873,7 +1874,12 @@
 		"priorityAuto": "Otomatik",
 		"reminderPlaceholder": "30",
 		"commands": "İpucu: doğal dille yaz. İstersen: #etiket · !günlük/!haftalık/!aylık/!yıllık · !p1-!p5 · !hatırlat 30dk. Alt görev için: -böl satırı + -ag başlık satırları.",
-		"reminderNeedsDue": "Hatırlatma için bitiş tarihi gerekli."
+		"reminderNeedsDue": "Hatırlatma için bitiş tarihi gerekli.",
+		"addReminder": "Saat ekle",
+		"reminderRef": {
+			"due": "Son tarihe göre",
+			"end": "Bitişe göre"
+		}
 	},
 	"plan": {
 		"title": "Plan",
