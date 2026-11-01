@@ -12,7 +12,7 @@
 
 	<Modal
 		:enabled="open"
-		variant="sheet"
+		:variant="modalVariant"
 		:title="$t('capture.title')"
 		@close="closePanel"
 	>
@@ -25,7 +25,10 @@
 			</BaseButton>
 		</template>
 
-		<div class="capture-panel">
+		<div
+			class="capture-panel"
+			:class="{'is-phone': isPhone}"
+		>
 			<template v-if="!draft">
 				<div class="capture-panel__modes">
 					<XButton
@@ -117,6 +120,18 @@
 			</template>
 
 			<template v-else>
+				<header
+					v-if="!isPhone"
+					class="capture-panel__header"
+				>
+					<div>
+						<h2>{{ $t('capture.title') }}</h2>
+						<p class="capture-panel__hint">
+							{{ $t('capture.dialogHint') }}
+						</p>
+					</div>
+				</header>
+
 				<p class="capture-panel__hint">
 					{{ $t('capture.draftHint') }}
 				</p>
@@ -128,137 +143,145 @@
 					<strong>{{ $t('capture.transcript') }}:</strong> {{ transcript }}
 				</p>
 
-				<label class="label">{{ $t('capture.fields.title') }}</label>
-				<input
-					v-model="draft.title"
-					class="input"
-				>
-
-				<label class="label">{{ $t('capture.fields.description') }}</label>
-				<textarea
-					v-model="draft.description"
-					class="input"
-					rows="3"
-				/>
-
-				<div class="capture-panel__grid">
-					<div>
-						<label class="label">{{ $t('capture.fields.project') }}</label>
-						<select
-							v-model.number="draft.project_id"
-							class="input"
-						>
-							<option
-								v-for="project in projects"
-								:key="project.id"
-								:value="project.id"
-							>
-								{{ project.title }}
-							</option>
-						</select>
-					</div>
-					<div>
-						<label class="label">{{ $t('capture.fields.duration') }}</label>
+				<div class="capture-panel__layout">
+					<div class="capture-panel__main">
+						<label class="label">{{ $t('capture.fields.title') }}</label>
 						<input
-							v-model.number="draft.duration_min"
-							class="input"
-							type="number"
-							min="5"
-							max="480"
-						>
-					</div>
-					<div>
-						<label class="label">{{ $t('capture.fields.dueDate') }}</label>
-						<input
-							v-model="dueDateLocal"
-							class="input"
-							type="datetime-local"
-						>
-					</div>
-					<div>
-						<label class="label">{{ $t('capture.fields.importance') }}</label>
-						<select
-							v-model="draft.importance"
+							v-model="draft.title"
 							class="input"
 						>
-							<option value="low">{{ $t('capture.level.low') }}</option>
-							<option value="medium">{{ $t('capture.level.medium') }}</option>
-							<option value="high">{{ $t('capture.level.high') }}</option>
-						</select>
-					</div>
-					<div>
-						<label class="label">{{ $t('capture.fields.urgency') }}</label>
-						<select
-							v-model="draft.urgency"
-							class="input"
-						>
-							<option value="low">{{ $t('capture.level.low') }}</option>
-							<option value="medium">{{ $t('capture.level.medium') }}</option>
-							<option value="high">{{ $t('capture.level.high') }}</option>
-						</select>
-					</div>
-				</div>
 
-				<div class="capture-panel__divider" />
+						<label class="label">{{ $t('capture.fields.description') }}</label>
+						<textarea
+							v-model="draft.description"
+							class="input"
+							rows="4"
+						/>
 
-				<label class="label">{{ $t('capture.fields.labels') }}</label>
-				<input
-					v-model="labelsText"
-					class="input capture-panel__labels"
-					:placeholder="$t('capture.labelsPlaceholder')"
-				>
-
-				<div class="capture-panel__grid">
-					<div>
-						<label class="label">{{ $t('capture.fields.repeat') }}</label>
-						<div class="capture-panel__repeat">
-							<input
-								v-model.number="draft.repeat_every"
-								class="input"
-								type="number"
-								min="1"
-								max="3650"
-								:placeholder="$t('capture.repeatEvery')"
-							>
-							<select
-								v-model="draft.repeat_unit"
-								class="input"
-							>
-								<option value="">{{ $t('capture.repeatUnits.none') }}</option>
-								<option value="hour">{{ $t('capture.repeatUnits.hour') }}</option>
-								<option value="day">{{ $t('capture.repeatUnits.day') }}</option>
-								<option value="week">{{ $t('capture.repeatUnits.week') }}</option>
-								<option value="month">{{ $t('capture.repeatUnits.month') }}</option>
-								<option value="year">{{ $t('capture.repeatUnits.year') }}</option>
-							</select>
+						<div class="capture-panel__grid">
+							<div>
+								<label class="label">{{ $t('capture.fields.project') }}</label>
+								<select
+									v-model.number="draft.project_id"
+									class="input"
+								>
+									<option
+										v-for="project in projects"
+										:key="project.id"
+										:value="project.id"
+									>
+										{{ project.title }}
+									</option>
+								</select>
+							</div>
+							<div>
+								<label class="label">{{ $t('capture.fields.dueDate') }}</label>
+								<input
+									v-model="dueDateLocal"
+									class="input"
+									type="datetime-local"
+								>
+							</div>
+							<div>
+								<label class="label">{{ $t('capture.fields.duration') }}</label>
+								<input
+									v-model.number="draft.duration_min"
+									class="input"
+									type="number"
+									min="5"
+									max="480"
+								>
+							</div>
+							<div>
+								<label class="label">{{ $t('capture.fields.importance') }}</label>
+								<select
+									v-model="draft.importance"
+									class="input"
+								>
+									<option value="low">{{ $t('capture.level.low') }}</option>
+									<option value="medium">{{ $t('capture.level.medium') }}</option>
+									<option value="high">{{ $t('capture.level.high') }}</option>
+								</select>
+							</div>
+							<div>
+								<label class="label">{{ $t('capture.fields.urgency') }}</label>
+								<select
+									v-model="draft.urgency"
+									class="input"
+								>
+									<option value="low">{{ $t('capture.level.low') }}</option>
+									<option value="medium">{{ $t('capture.level.medium') }}</option>
+									<option value="high">{{ $t('capture.level.high') }}</option>
+								</select>
+							</div>
 						</div>
 					</div>
-					<div>
-						<label class="label">{{ $t('capture.fields.priority') }}</label>
-						<select
-							v-model="draft.priority"
-							class="input capture-panel__priority"
-						>
-							<option :value="null">{{ $t('capture.priorityAuto') }}</option>
-							<option
-								v-for="level in 5"
-								:key="level"
-								:value="level"
-							>
-								{{ level }}
-							</option>
-						</select>
-					</div>
-					<div>
-						<label class="label">{{ $t('capture.fields.reminder') }}</label>
+
+					<aside class="capture-panel__side">
+						<h3 class="capture-panel__side-title">
+							{{ $t('capture.fields.planning') }}
+						</h3>
+
+						<label class="label">{{ $t('capture.fields.labels') }}</label>
 						<input
-							v-model.number="draft.reminder_minutes"
-							class="input capture-panel__reminder"
-							type="number"
-							min="1"
-							:placeholder="$t('capture.reminderPlaceholder')"
+							v-model="labelsText"
+							class="input capture-panel__labels"
+							:placeholder="$t('capture.labelsPlaceholder')"
 						>
-					</div>
+
+						<div class="capture-panel__side-grid">
+							<div class="capture-panel__repeat-field">
+								<label class="label">{{ $t('capture.fields.repeat') }}</label>
+								<div class="capture-panel__repeat">
+									<input
+										v-model.number="draft.repeat_every"
+										class="input"
+										type="number"
+										min="1"
+										max="3650"
+										:placeholder="$t('capture.repeatEvery')"
+									>
+									<select
+										v-model="draft.repeat_unit"
+										class="input"
+									>
+										<option value="">{{ $t('capture.repeatUnits.none') }}</option>
+										<option value="hour">{{ $t('capture.repeatUnits.hour') }}</option>
+										<option value="day">{{ $t('capture.repeatUnits.day') }}</option>
+										<option value="week">{{ $t('capture.repeatUnits.week') }}</option>
+										<option value="month">{{ $t('capture.repeatUnits.month') }}</option>
+										<option value="year">{{ $t('capture.repeatUnits.year') }}</option>
+									</select>
+								</div>
+							</div>
+							<div>
+								<label class="label">{{ $t('capture.fields.priority') }}</label>
+								<select
+									v-model="draft.priority"
+									class="input capture-panel__priority"
+								>
+									<option :value="null">{{ $t('capture.priorityAuto') }}</option>
+									<option
+										v-for="level in 5"
+										:key="level"
+										:value="level"
+									>
+										{{ level }}
+									</option>
+								</select>
+							</div>
+							<div>
+								<label class="label">{{ $t('capture.fields.reminder') }}</label>
+								<input
+									v-model.number="draft.reminder_minutes"
+									class="input capture-panel__reminder"
+									type="number"
+									min="1"
+									:placeholder="$t('capture.reminderPlaceholder')"
+								>
+							</div>
+						</div>
+					</aside>
 				</div>
 
 				<div class="capture-panel__subtasks">
@@ -351,6 +374,7 @@
 <script lang="ts" setup>
 import {computed, onBeforeUnmount, ref} from 'vue'
 import {useI18n} from 'vue-i18n'
+import {useMediaQuery} from '@vueuse/core'
 import {useRoute, useRouter} from 'vue-router'
 
 import BaseButton from '@/components/base/BaseButton.vue'
@@ -403,6 +427,8 @@ const {t} = useI18n({useScope: 'global'})
 const route = useRoute()
 const router = useRouter()
 const isPlanRoute = computed(() => route.name === 'plan')
+const isPhone = useMediaQuery('(max-width: 600px)')
+const modalVariant = computed(() => isPhone.value ? 'sheet' : 'scrolling')
 const open = ref(false)
 const mode = ref<'text' | 'voice'>('text')
 const text = ref('')
@@ -820,13 +846,73 @@ async function submit(): Promise<void> {
 .capture-panel {
 	display: flex;
 	flex-direction: column;
-	gap: 0.6rem;
-	padding: 0.5rem 1rem 1rem;
-	inline-size: min(32rem, 86vw);
+	gap: 0.75rem;
+	padding: 1rem 1.25rem 1.25rem;
+	inline-size: 100%;
+	max-inline-size: 64rem;
 	margin-inline: auto;
-	max-block-size: min(78vh, 48rem);
-	overflow-y: auto;
-	overscroll-behavior: contain;
+
+	&.is-phone {
+		max-block-size: 82vh;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		padding: 0.75rem 1rem;
+	}
+
+	&__header {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 1rem;
+
+		h2 {
+			margin: 0;
+			font-size: 1.35rem;
+		}
+
+		.capture-panel__hint {
+			margin-block-end: 0;
+		}
+	}
+
+	&__layout {
+		display: grid;
+		grid-template-columns: minmax(0, 1.5fr) minmax(20rem, 0.85fr);
+		gap: 1.25rem;
+		align-items: start;
+	}
+
+	&__main {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		min-inline-size: 0;
+	}
+
+	&__side {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		background: var(--grey-100);
+		border-radius: $radius;
+		padding: 0.85rem;
+	}
+
+	&__side-title {
+		font-size: 0.95rem;
+		font-weight: 700;
+		margin: 0 0 0.15rem;
+	}
+
+	&__side-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.55rem;
+	}
+
+	&__repeat-field {
+		grid-column: 1 / -1;
+	}
 
 	&__hint {
 		color: var(--grey-500);
@@ -930,10 +1016,53 @@ async function submit(): Promise<void> {
 	}
 
 	&__actions {
+		position: sticky;
+		inset-block-end: 0;
+		z-index: 2;
 		display: flex;
 		justify-content: flex-end;
 		gap: 0.5rem;
-		margin-block-start: 0.5rem;
+		margin-block-start: 0.25rem;
+		padding-block: 0.65rem;
+		background: var(--white);
+		border-block-start: 1px solid var(--grey-200);
+	}
+
+	&__actions .button,
+	&__subtasks-header .button {
+		min-block-size: 44px;
+	}
+
+	&__subtask .base-button {
+		min-block-size: 44px;
+		min-inline-size: 44px;
+	}
+
+	&.is-phone {
+		.input,
+		select.input {
+			min-block-size: 44px;
+		}
+	}
+
+	@media screen and (max-width: 960px) {
+		&__layout {
+			grid-template-columns: 1fr;
+		}
+
+		&__side-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media screen and (max-width: $tablet) {
+		&__side-grid {
+			grid-template-columns: 1fr;
+		}
+
+		&__repeat-field {
+			grid-column: auto;
+		}
 	}
 }
 @keyframes capture-pulse {

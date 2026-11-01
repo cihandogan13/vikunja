@@ -1831,7 +1831,9 @@
       "labels": "Labels",
       "repeat": "Repeat",
       "priority": "Priority",
-      "reminder": "Remind (min before)"
+      "reminder": "Remind (min before)",
+      "planning": "Labels & planning",
+      "dialogHint": "Capture with text or voice, edit the draft and create the task."
     },
     "level": {
       "low": "Low",

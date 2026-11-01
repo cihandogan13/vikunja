@@ -1826,7 +1826,9 @@
 			"labels": "Etiketler",
 			"repeat": "Tekrar",
 			"priority": "Öncelik",
-			"reminder": "Hatırlat (dk önce)"
+			"reminder": "Hatırlat (dk önce)",
+			"planning": "Etiket ve planlama",
+			"dialogHint": "Metin veya sesle yakala; taslağı düzenleyip görevi oluştur."
 		},
 		"level": {
 			"low": "Düşük",
