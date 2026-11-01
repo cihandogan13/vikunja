@@ -1875,7 +1875,8 @@
     },
     "priorityAuto": "Auto",
     "reminderPlaceholder": "30",
-    "commands": "Tip: write naturally. Optional: #label · !günlük/!haftalık/!aylık/!yıllık · !p1-!p5 · !hatırlat 30dk. Subtasks: -böl line + -ag title lines."
+    "commands": "Tip: write naturally. Optional: #label · !günlük/!haftalık/!aylık/!yıllık · !p1-!p5 · !hatırlat 30dk. Subtasks: -böl line + -ag title lines.",
+    "reminderNeedsDue": "A reminder needs a due date."
   },
   "plan": {
     "title": "Plan",

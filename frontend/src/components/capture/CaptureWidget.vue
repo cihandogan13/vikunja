@@ -695,6 +695,11 @@ async function commitDraft(): Promise<void> {
 		return
 	}
 
+	if (Number(draft.value.reminder_minutes) > 0 && !draft.value.due_date) {
+		errorMessage.value = t('capture.reminderNeedsDue')
+		return
+	}
+
 	errorMessage.value = ''
 	commitLoading.value = true
 	try {

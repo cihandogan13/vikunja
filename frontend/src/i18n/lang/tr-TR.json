@@ -1870,7 +1870,8 @@
 		},
 		"priorityAuto": "Otomatik",
 		"reminderPlaceholder": "30",
-		"commands": "İpucu: doğal dille yaz. İstersen: #etiket · !günlük/!haftalık/!aylık/!yıllık · !p1-!p5 · !hatırlat 30dk. Alt görev için: -böl satırı + -ag başlık satırları."
+		"commands": "İpucu: doğal dille yaz. İstersen: #etiket · !günlük/!haftalık/!aylık/!yıllık · !p1-!p5 · !hatırlat 30dk. Alt görev için: -böl satırı + -ag başlık satırları.",
+		"reminderNeedsDue": "Hatırlatma için bitiş tarihi gerekli."
 	},
 	"plan": {
 		"title": "Plan",
