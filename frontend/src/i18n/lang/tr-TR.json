@@ -1912,6 +1912,26 @@
 		"sessionMissing": "Oturum bulunamadı. Lütfen tekrar giriş yap.",
 		"loadFailed": "Plan yüklenemedi.",
 		"runFailed": "Plan oluşturulamadı.",
-		"deferred": "Ertelenen"
+		"deferred": "Ertelenen",
+		"eyebrow": "Günlük plan",
+		"today": "Bugün",
+		"previousDay": "Önceki gün",
+		"nextDay": "Sonraki gün",
+		"week": "Hafta",
+		"live": "Canlı",
+		"updated": "Güncellendi",
+		"updating": "Plan güncelleniyor…",
+		"now": "Şimdi",
+		"generatedAt": "{time} itibarıyla oluşturuldu",
+		"summary": "Özet",
+		"taskCount": "{count} görev",
+		"plannedTotal": "{count} dk planlandı",
+		"freeShort": "{count} dk boş",
+		"windowShort": "{start}–{end}",
+		"nextUp": "Sırada",
+		"noNext": "Sırada görev yok.",
+		"noUnscheduled": "Sığmayan görev yok.",
+		"emptyCalendar": "Bu gün için planlanmış görev yok.",
+		"emptyHint": "Yakalama panelinden görev eklediğinde plan birkaç dakika içinde burada görünür."
 	}
 }

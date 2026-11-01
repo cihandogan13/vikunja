@@ -1917,6 +1917,26 @@
     "sessionMissing": "Session not found. Please log in again.",
     "loadFailed": "Could not load the plan.",
     "runFailed": "Could not create the plan.",
-    "deferred": "Deferred"
+    "deferred": "Deferred",
+    "eyebrow": "Daily plan",
+    "today": "Today",
+    "previousDay": "Previous day",
+    "nextDay": "Next day",
+    "week": "Week",
+    "live": "Live",
+    "updated": "Updated",
+    "updating": "Updating plan…",
+    "now": "Now",
+    "generatedAt": "Generated at {time}",
+    "summary": "Summary",
+    "taskCount": "{count} tasks",
+    "plannedTotal": "{count} min planned",
+    "freeShort": "{count} min free",
+    "windowShort": "{start}–{end}",
+    "nextUp": "Up next",
+    "noNext": "Nothing up next.",
+    "noUnscheduled": "Everything fits.",
+    "emptyCalendar": "Nothing scheduled for this day.",
+    "emptyHint": "Add a task from the capture panel and it will appear here within a few minutes."
   }
 }
