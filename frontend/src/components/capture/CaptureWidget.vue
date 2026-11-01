@@ -103,6 +103,10 @@
 					</div>
 				</template>
 
+				<p class="capture-panel__commands">
+					{{ $t('capture.commands') }}
+				</p>
+
 				<p
 					v-if="errorMessage"
 					class="has-text-danger"
@@ -195,11 +199,74 @@
 					</div>
 				</div>
 
+				<div class="capture-panel__divider" />
+
+				<label class="label">{{ $t('capture.fields.labels') }}</label>
+				<input
+					v-model="labelsText"
+					class="input capture-panel__labels"
+					:placeholder="$t('capture.labelsPlaceholder')"
+				>
+
+				<div class="capture-panel__grid">
+					<div>
+						<label class="label">{{ $t('capture.fields.repeat') }}</label>
+						<div class="capture-panel__repeat">
+							<input
+								v-model.number="draft.repeat_every"
+								class="input"
+								type="number"
+								min="1"
+								max="3650"
+								:placeholder="$t('capture.repeatEvery')"
+							>
+							<select
+								v-model="draft.repeat_unit"
+								class="input"
+							>
+								<option value="">{{ $t('capture.repeatUnits.none') }}</option>
+								<option value="hour">{{ $t('capture.repeatUnits.hour') }}</option>
+								<option value="day">{{ $t('capture.repeatUnits.day') }}</option>
+								<option value="week">{{ $t('capture.repeatUnits.week') }}</option>
+								<option value="month">{{ $t('capture.repeatUnits.month') }}</option>
+								<option value="year">{{ $t('capture.repeatUnits.year') }}</option>
+							</select>
+						</div>
+					</div>
+					<div>
+						<label class="label">{{ $t('capture.fields.priority') }}</label>
+						<select
+							v-model="draft.priority"
+							class="input capture-panel__priority"
+						>
+							<option :value="null">{{ $t('capture.priorityAuto') }}</option>
+							<option
+								v-for="level in 5"
+								:key="level"
+								:value="level"
+							>
+								{{ level }}
+							</option>
+						</select>
+					</div>
+					<div>
+						<label class="label">{{ $t('capture.fields.reminder') }}</label>
+						<input
+							v-model.number="draft.reminder_minutes"
+							class="input capture-panel__reminder"
+							type="number"
+							min="1"
+							:placeholder="$t('capture.reminderPlaceholder')"
+						>
+					</div>
+				</div>
+
 				<div class="capture-panel__subtasks">
 					<div class="capture-panel__subtasks-header">
 						<span class="label">{{ $t('capture.subtasks.title') }}</span>
 						<XButton
 							variant="tertiary"
+							icon="plus"
 							:shadow="false"
 							@click="addSubtask"
 						>
@@ -304,6 +371,12 @@ type CaptureDraft = {
 	importance: Level,
 	urgency: Level,
 	duration_min: number,
+	labels: string[],
+	repeat_every: number | null,
+	repeat_unit: '' | 'hour' | 'day' | 'week' | 'month' | 'year',
+	priority: number | null,
+	reminder_minutes: number | null,
+	split_requested: boolean,
 	subtasks: SubtaskDraft[],
 	confidence: number,
 }
@@ -365,6 +438,21 @@ const dueDateLocal = computed({
 		}
 		const normalized = value.length === 16 ? `${value}:00` : value
 		draft.value.due_date = `${normalized}+03:00`
+	},
+})
+
+const labelsText = computed({
+	get(): string {
+		return draft.value?.labels?.join(', ') ?? ''
+	},
+	set(value: string): void {
+		if (!draft.value) {
+			return
+		}
+		draft.value.labels = value
+			.split(',')
+			.map(label => label.trim().replace(/^#/, ''))
+			.filter(Boolean)
 	},
 })
 let projectsLoaded = false
@@ -618,6 +706,14 @@ async function commitDraft(): Promise<void> {
 			},
 			body: JSON.stringify({
 				...draft.value,
+				labels: draft.value.labels,
+				repeat_every: draft.value.repeat_every && Number(draft.value.repeat_every) > 0
+					? Number(draft.value.repeat_every)
+					: null,
+				repeat_unit: draft.value.repeat_unit || '',
+				reminder_minutes: draft.value.reminder_minutes && Number(draft.value.reminder_minutes) > 0
+					? Number(draft.value.reminder_minutes)
+					: null,
 				subtasks: draft.value.subtasks
 					.map(subtask => ({
 						title: subtask.title.trim(),
@@ -723,6 +819,9 @@ async function submit(): Promise<void> {
 	padding: 0.5rem 1rem 1rem;
 	inline-size: min(32rem, 86vw);
 	margin-inline: auto;
+	max-block-size: min(78vh, 48rem);
+	overflow-y: auto;
+	overscroll-behavior: contain;
 
 	&__hint {
 		color: var(--grey-500);
@@ -763,6 +862,32 @@ async function submit(): Promise<void> {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 0.6rem;
+
+		@media screen and (max-width: $tablet) {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	&__divider {
+		border-block-start: 1px solid var(--grey-200);
+		margin-block: 0.35rem;
+	}
+
+	&__repeat {
+		display: flex;
+		gap: 0.4rem;
+
+		input {
+			inline-size: 5.5rem;
+			flex: 0 0 auto;
+		}
+	}
+
+	&__commands {
+		color: var(--grey-500);
+		font-size: 0.8rem;
+		line-height: 1.4;
+		margin-block-start: 0.25rem;
 	}
 
 	&__subtasks {

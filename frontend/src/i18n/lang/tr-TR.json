@@ -1822,7 +1822,11 @@
 			"duration": "Süre (dk)",
 			"importance": "Önem",
 			"urgency": "Aciliyet",
-			"dueDate": "Bitiş"
+			"dueDate": "Bitiş",
+			"labels": "Etiketler",
+			"repeat": "Tekrar",
+			"priority": "Öncelik",
+			"reminder": "Hatırlat (dk önce)"
 		},
 		"level": {
 			"low": "Düşük",
@@ -1853,7 +1857,20 @@
 			"placeholder": "Alt görev başlığı",
 			"duration": "Dakika",
 			"remove": "Alt görevi kaldır"
-		}
+		},
+		"labelsPlaceholder": "#etiket, iş",
+		"repeatEvery": "2",
+		"repeatUnits": {
+			"none": "Yok",
+			"hour": "Saat",
+			"day": "Gün",
+			"week": "Hafta",
+			"month": "Ay",
+			"year": "Yıl"
+		},
+		"priorityAuto": "Otomatik",
+		"reminderPlaceholder": "30",
+		"commands": "İpucu: doğal dille yaz. İstersen: #etiket · !günlük/!haftalık/!aylık/!yıllık · !p1-!p5 · !hatırlat 30dk. Alt görev için: -böl satırı + -ag başlık satırları."
 	},
 	"plan": {
 		"title": "Plan",

@@ -1827,7 +1827,11 @@
       "duration": "Duration (min)",
       "importance": "Importance",
       "urgency": "Urgency",
-      "dueDate": "Due date"
+      "dueDate": "Due date",
+      "labels": "Labels",
+      "repeat": "Repeat",
+      "priority": "Priority",
+      "reminder": "Remind (min before)"
     },
     "level": {
       "low": "Low",
@@ -1858,7 +1862,20 @@
       "placeholder": "Subtask title",
       "duration": "Minutes",
       "remove": "Remove subtask"
-    }
+    },
+    "labelsPlaceholder": "#label, work",
+    "repeatEvery": "2",
+    "repeatUnits": {
+      "none": "None",
+      "hour": "Hour",
+      "day": "Day",
+      "week": "Week",
+      "month": "Month",
+      "year": "Year"
+    },
+    "priorityAuto": "Auto",
+    "reminderPlaceholder": "30",
+    "commands": "Tip: write naturally. Optional: #label · !günlük/!haftalık/!aylık/!yıllık · !p1-!p5 · !hatırlat 30dk. Subtasks: -böl line + -ag title lines."
   },
   "plan": {
     "title": "Plan",
